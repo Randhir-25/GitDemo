@@ -1,0 +1,14 @@
+create table Student (sid integer not null auto_increment, spassword varchar(50) not null, sfirstname varchar(50)not null, slastname varchar(50)not null, semailid varchar(50)not null, sphone varchar(15)not null, primary key (sid));
+
+create table Employee (empid integer not null auto_increment, emppassword varchar(50) not null, empfirstname varchar(50)not null, emplastname varchar(50)not null, empemailid varchar(50)not null, emprole varchar(50)not null, primary key (empid));
+
+create table Author (authid integer not null auto_increment, authfirstname varchar(50)not null, authsecondname varchar(50), authpenname varchar(50), authemailid varchar(50)not null, primary key (authid));
+
+create table Publisher (pubid integer not null auto_increment, pubname varchar(50)not null, pubcreatedondate date not null, primary key (pubid));
+
+create table Category (categoryid integer not null auto_increment, categoryname varchar(50)not null, primary key (categoryid));
+
+create table Book (isbn integer not null auto_increment, bookname varchar(50)not null, bookedision varchar(50), noofbooksavailable integer, pubid integer not null, categoryid integer not null, authid integer not null, primary key (isbn), FOREIGN KEY (pubid) REFERENCES Publisher(pubid), FOREIGN KEY (categoryid) REFERENCES Category(categoryid), FOREIGN KEY (authid) REFERENCES Author(authid));
+
+create table Loan (loanid integer not null auto_increment, sid integer not null, isbn integer not null, empid integer not null, primary key (loanid), FOREIGN KEY (sid) REFERENCES Student(sid), FOREIGN KEY (isbn) REFERENCES Book(isbn), FOREIGN KEY (empid) REFERENCES Employee(empid));
+
